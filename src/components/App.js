@@ -10,7 +10,7 @@ export default class App extends Component {
         const _onError = err => {
             console.log('error', err)
         }
-        if (window.gapi.load !== undefined) {
+        if (window.gapi !== undefined) {
             window.gapi.load('auth2', function() {
                 window.gapi.auth2
                     .init({
