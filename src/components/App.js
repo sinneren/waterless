@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <Link to="/">Главная</Link>
+                    <Link to="/login">Войти</Link>
+                </header>
+                <main>
+                    {this.props.children}
+                </main>
+                <footer>
+                    &copy; 2018 - &laquo;Waterless&raquo;, тестовое задание #3. Автор regieslinkas[@at]gmail[dot]com
+                </footer>
+            </div>
+        );
+    }
 }
 
 export default App;
