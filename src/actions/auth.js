@@ -1,4 +1,5 @@
 import history from "../history";
+import axios from 'axios';
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -15,16 +16,30 @@ export function startingAuthWithGA () {
         });
     }
 }
-export function authWithGA (name) {
+export function authWithGA (name, token) {
     return dispatch => {
-        dispatch({
-            type: AUTH_SUCCESS,
-            payload: {
-                request: false,
-                username: name,
-            }
-        });
-        history.push('/');
+        axios.post('http://localhost:5000/api/v1/auth/google', {
+            token: token
+        })
+            .then(function (response) {
+                dispatch({
+                    type: AUTH_SUCCESS,
+                    payload: {
+                        request: false,
+                        username: name,
+                    }
+                });
+                history.push('/');
+            })
+            .catch(function (error) {
+                dispatch({
+                    type: AUTH_FAIL,
+                    payload: {
+                        request: false,
+                        error_message: error,
+                    }
+                });
+            });
     }
 }
 export function signOutWithGA() {

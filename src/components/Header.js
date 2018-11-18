@@ -13,7 +13,8 @@ const Header = props => {
             auth2.signIn()
                 .then(googleUser => {
                     const profile = googleUser.getBasicProfile();
-                    props.actions.authWithGA(profile.getName());
+                    const id_token = googleUser.getAuthResponse().id_token;
+                    props.actions.authWithGA(profile.getName(), id_token);
                 })
                 .catch(err => {
                     props.actions.errorAuthGA(err.error);
