@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Footer from './Footer';
-import Header from './Header';
+import HeaderContainer from '../containers/Header';
 
 export default class App extends Component {
     componentDidMount() {
@@ -23,7 +23,7 @@ export default class App extends Component {
     render() {
         return (
             <>
-                <Header />
+                <HeaderContainer />
                 <main>{this.props.children}</main>
                 <Footer />
             </>
