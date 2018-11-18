@@ -6,7 +6,6 @@ import ReduxThunk from 'redux-thunk';
 
 import rootReducer from './reducers';
 import Root from './components/Root';
-import './index.css';
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk, logger));
 

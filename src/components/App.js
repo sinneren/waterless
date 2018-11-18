@@ -1,23 +1,33 @@
-import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import React, { Component } from 'react'
+import Footer from './Footer';
+import Header from './Header';
 
-class App extends Component {
+export default class App extends Component {
+    componentDidMount() {
+        const _onInit = () => {
+            console.log('gapi initialized')
+        }
+        const _onError = err => {
+            console.log('error', err)
+        }
+        if (window.gapi.load !== undefined) {
+            window.gapi.load('auth2', function() {
+                window.gapi.auth2
+                    .init({
+                        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+                    })
+                    .then(_onInit, _onError)
+            })
+        }
+    }
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <Link to="/">Главная</Link>
-                    <Link to="/login">Войти</Link>
-                </header>
-                <main>
-                    {this.props.children}
-                </main>
-                <footer>
-                    &copy; 2018 - &laquo;Waterless&raquo;, тестовое задание #3. Автор regieslinkas[@at]gmail[dot]com
-                </footer>
-            </div>
+            <>
+                <Header />
+                <main>{this.props.children}</main>
+                <Footer />
+            </>
         );
     }
-}
+};
 
-export default App;
