@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as newsActions from '../../actions/news';
 import NewsDetail from '../../components/NewsDetail';
+import history from "../../history";
 
 class NewsDetailContainer extends Component {
     renderNewsDetail = (feed) => {
@@ -16,7 +17,12 @@ class NewsDetailContainer extends Component {
         }
     }
     componentDidMount() {
-        this.props.actions.getNewsByID('5bf41d45dc37200055fc6648')
+        this.props.actions.getNewsByID(this.props.match.params.newsId);
+    }
+    componentDidUpdate() {
+        if (this.props.state.news.status === 404) {
+            history.push('/404');
+        }
     }
     render() {
         return (

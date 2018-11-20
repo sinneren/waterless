@@ -18,7 +18,6 @@ export function startingAuthWithGA () {
 }
 export function authWithGA (name, token) {
     return dispatch => {
-        console.info(token);
         axios.post('http://localhost:5000/api/v1/auth/google', {
             token: token
         })
@@ -28,6 +27,7 @@ export function authWithGA (name, token) {
                     payload: {
                         request: false,
                         username: name,
+                        token: response.data.token,
                     }
                 });
                 history.push('/');
@@ -49,7 +49,6 @@ export function signOutWithGA() {
             type: AUTH_SIGNOUT,
             payload: {
                 request: false,
-                username: null,
             }
         });
         history.push('/');

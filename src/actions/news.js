@@ -4,6 +4,7 @@ export const NEWS_REQUEST = 'NEWS_REQUEST';
 export const NEWS_GET = 'NEWS_GET';
 export const NEWS_LOAD_FAIL = 'NEWS_LOAD_FAIL';
 export const NEWS_DETAIL_LOAD_SUCCESS = 'NEWS_DETAIL_LOAD_SUCCESS';
+export const NEWS_DELETE_SUCCESS = 'NEWS_DELETE_SUCCESS';
 
 export function getNews () {
     return dispatch => {
@@ -63,9 +64,48 @@ export function getNewsByID(id) {
                     type: NEWS_LOAD_FAIL,
                     payload: {
                         request: false,
-                        error_message: error
+                        status: error.response.status,
+                        error_message: error.message
                     }
                 });
             })
+    }
+}
+export function deleteNewsById(id, token) {
+    console.log(token)
+    return dispatch => {
+        dispatch({
+            type: NEWS_REQUEST,
+            payload: {
+                request: true,
+            }
+        });
+        axios
+            .delete('http://localhost:5000/api/v1/feeds/' + id, {
+                headers: {
+                    'content-type': 'application/json',
+                    'charset': 'utf-8',
+                    'x-access-token': token,
+                }
+            })
+                .then(function (response) {
+                    if (response.status === 200) {
+                        dispatch({
+                            type: NEWS_DELETE_SUCCESS,
+                            payload: {
+                                request: false,
+                            }
+                        });
+                    }
+                })
+                .catch(function (error) {
+                    dispatch({
+                        type: NEWS_LOAD_FAIL,
+                        payload: {
+                            request: false,
+                            error_message: error
+                        }
+                    });
+                })
     }
 }

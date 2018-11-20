@@ -5,6 +5,7 @@ const initialState = {
     request: false,
     error_message: '',
     username: null,
+    token: null,
 }
 
 const auth = (state = initialState, action) => {
@@ -19,8 +20,10 @@ const auth = (state = initialState, action) => {
             return {
                 ...state,
                 username: action.payload.username,
+                token: action.payload.token,
                 request: action.payload.request,
                 error_message: '',
+                secret:'123'
             }
         case AUTH_FAIL:
             return {
@@ -31,7 +34,8 @@ const auth = (state = initialState, action) => {
         case AUTH_SIGNOUT:
             return {
                 ...state,
-                username: action.payload.username,
+                username: null,
+                token: null,
                 request: action.payload.request,
                 error_message: '',
             }
