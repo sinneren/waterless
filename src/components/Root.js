@@ -6,6 +6,7 @@ import { Router } from 'react-router-dom';
 import App from './App';
 import Err404 from './Err404';
 import News from '../containers/News';
+import NewsDetailContainer from '../containers/NewsDetail';
 import history  from '../history';
 
 const Root = ({ store }) => (
@@ -15,8 +16,8 @@ const Root = ({ store }) => (
                 <Switch>
                     <Route exact path="/" component={News} />
                     <Route exact path="/news" component={News} />
-                    <Route exact path="/news:newsId" component={News} />
-                    <Route exact path="/news:newsId/edit" component={News} />
+                    <Route exact path="/news/:newsId" component={NewsDetailContainer} />
+                    <Route exact path="/news/:newsId/edit" component={News} />
                     <Route component={Err404} />
                 </Switch>
             </App>

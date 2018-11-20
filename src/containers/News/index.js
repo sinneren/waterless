@@ -7,7 +7,7 @@ import NewsItem from '../../components/NewsItem';
 class News extends Component {
     renderNewsItems = (feeds) => {
         return feeds.map(item => {
-            return <NewsItem key={item._id} createDate={item.createDate} creator={item.creator} title={item.title} content={item.content}/>
+            return <NewsItem key={item._id} id={item._id} createDate={item.createDate} creator={item.creator} title={item.title} content={item.content}/>
         })
     }
     componentDidMount () {
@@ -15,9 +15,9 @@ class News extends Component {
     }
     render() {
         return (
-            <div>
+            <>
                 {this.renderNewsItems(this.props.state.news.feed_list)}
-            </div>
+            </>
         )
     }
 }

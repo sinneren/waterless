@@ -4,14 +4,13 @@ const calculateDateTimeFormatted = (date) => {
     let datetime = new Date(date);
     return datetime.getDate() + '/' + datetime.getMonth() + '/' + datetime.getFullYear();
 }
-const NewsItem = props => ({
-    
+const NewsDetail = props => ({
     render() {
         return (
             <div>
-                <h2><a href={"/news/" + props.id}>{props.title}</a></h2>
-                <small>{props.creator.displayName}</small>
-                <small>{calculateDateTimeFormatted(props.createDate)}</small>
+                <h1>{props.title}</h1>
+                <small>{props.creator}</small>
+                <small>{calculateDateTimeFormatted(props.date)}</small>
                 <section>
                     {props.content}
                 </section>
@@ -20,4 +19,4 @@ const NewsItem = props => ({
     }
 })
 
-export default NewsItem;
+export default NewsDetail;
