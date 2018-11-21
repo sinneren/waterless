@@ -5,7 +5,7 @@ const Header = props => {
     const signIn = (event) => {
         event.preventDefault();
 
-        if (window.gapi !== undefined) {
+        if (window.gapi.auth2 !== undefined) {
             props.actions.startingAuthWithGA();
 
             const auth2 = window.gapi.auth2.getAuthInstance();

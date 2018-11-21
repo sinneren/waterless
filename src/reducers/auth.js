@@ -23,7 +23,6 @@ const auth = (state = initialState, action) => {
                 token: action.payload.token,
                 request: action.payload.request,
                 error_message: '',
-                secret:'123'
             }
         case AUTH_FAIL:
             return {
