@@ -29,7 +29,10 @@ export default class NewsEdit extends Component {
                         }
                     }}
                     onSubmit={(values, { setSubmitting }) => {
+                        this.props.saveAction(values)
                         setSubmitting(false);
+
+                        // history.push('/news/' + this.props.details._id);
                     }}
                 >
                 {

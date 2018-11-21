@@ -29,7 +29,7 @@ class News extends Component {
                 title={item.title} 
                 content={item.content}
                 actionDelete={this.handleDelete}
-                editable={(item.creator._id === this.state.user_id) ? true : false}
+                editable={(item.creator._id === this.state.user_id) ? 'editable' : ''}
             />
         })
     }

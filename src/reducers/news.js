@@ -1,4 +1,4 @@
-import { NEWS_REQUEST, NEWS_GET, NEWS_LOAD_FAIL, NEWS_DETAIL_LOAD_SUCCESS, NEWS_DELETE_SUCCESS } from '../actions/news';
+import { NEWS_REQUEST, NEWS_GET, NEWS_LOAD_FAIL, NEWS_DETAIL_LOAD_SUCCESS, NEWS_DELETE_SUCCESS, NEWS_EDIT_SUCCESS } from '../actions/news';
 
 const initialState = {
     request: false,
@@ -41,6 +41,13 @@ const news = (state = initialState, action) => {
             return {
                 ...state,
                 request: action.payload.request,
+                error_message: '',
+            }
+        case NEWS_EDIT_SUCCESS:
+            return {
+                ...state,
+                request: action.payload.request,
+                response: action.payload.response,
                 error_message: '',
             }
         default:

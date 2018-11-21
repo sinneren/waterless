@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import history from "../history";
 
@@ -6,16 +6,21 @@ const calculateDateTimeFormatted = (date) => {
     let datetime = new Date(date);
     return datetime.getDate() + '/' + datetime.getMonth() + '/' + datetime.getFullYear();
 }
-const NewsItem = props => ({
+export default class NewsItem extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleDeleteClick = this.handleDeleteClick.bind(this);
+        this.handleEditClick = this.handleEditClick.bind(this);
+    }
     handleDeleteClick(event) {
         event.preventDefault();
-
-        props.actionDelete(props.id);
-    },
+        this.props.actionDelete(this.props.id);
+    }
     handleEditClick(event) {
         event.preventDefault();
-        history.push('/news/' + props.id + '/edit');
-    },
+        history.push('/news/' + this.props.id + '/edit');
+    }
     render() {
         const controls = <div>
             <button onClick={this.handleDeleteClick}>DELETE</button>
@@ -24,17 +29,15 @@ const NewsItem = props => ({
         return (
             <div>
                 <h2>
-                    <Link to={"/news/" + props.id}>{props.title}</Link>
+                    <Link to={"/news/" + this.props.id}>{this.props.title}</Link>
                 </h2>
-                {!props.editable && controls}
-                <small>{props.creator.displayName}</small>
-                <small>{calculateDateTimeFormatted(props.createDate)}</small>
+                {(this.props.editable === 'editable') ? controls : ''}
+                <small>{this.props.creator.displayName}</small>
+                <small>{calculateDateTimeFormatted(this.props.createDate)}</small>
                 <section>
-                    {props.content}
+                    {this.props.content}
                 </section>
             </div>
         )
     }
-})
-
-export default NewsItem;
+}
