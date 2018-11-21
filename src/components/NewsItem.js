@@ -35,7 +35,7 @@ export default class NewsItem extends Component {
                 <small>{this.props.creator.displayName}</small>
                 <small>{calculateDateTimeFormatted(this.props.createDate)}</small>
                 <section>
-                    {this.props.content}
+                    {this.props.content.slice(0, 200) + '...'}
                 </section>
             </div>
         )

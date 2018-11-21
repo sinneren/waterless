@@ -2,7 +2,9 @@ import { NEWS_REQUEST, NEWS_GET, NEWS_LOAD_FAIL, NEWS_DETAIL_LOAD_SUCCESS, NEWS_
 
 const initialState = {
     request: false,
+    edited: false,
     error_message: '',
+    feed_item: null,
     feed_list: [],
     status: 200,
 }
@@ -34,6 +36,7 @@ const news = (state = initialState, action) => {
                 ...state,
                 request: action.payload.request,
                 status: 200,
+                edited: false,
                 feed_item: action.payload.response_data.feed,
                 error_message: '',
             }
@@ -47,7 +50,8 @@ const news = (state = initialState, action) => {
             return {
                 ...state,
                 request: action.payload.request,
-                response: action.payload.response,
+                feed_item: action.payload.response_data.feed,
+                edited: true,
                 error_message: '',
             }
         default:

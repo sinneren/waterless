@@ -117,22 +117,24 @@ export function editNewById(id, token, data) {
                 request: true,
             }
         });
-        axios
-            .put('http://localhost:5000/api/v1/feeds/' + id, {
-                data: JSON.stringify(data),
-                headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
-                    'x-access-token': token,
-                },
-            })
+        axios({
+            method: 'put',
+            url: 'http://localhost:5000/api/v1/feeds/' + id,
+            data: data,
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json',
+                "Cache-Control": "no-cache",
+                'x-access-token': token,
+            },
+        })
             .then(function (response) {
                 if (response.status === 200) {
                     dispatch({
                         type: NEWS_EDIT_SUCCESS,
                         payload: {
                             request: false,
-                            response: response,
+                            response_data: response.data,
                         }
                     });
                 }
