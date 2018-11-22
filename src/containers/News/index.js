@@ -15,18 +15,18 @@ class News extends Component {
             user_id: null,
         }
     }
- 
+
     handleDelete = (id) => {
         this.props.actions.deleteNewsById(id, this.props.state.auth.token);
     }
     renderNewsItems = (feeds) => {
         return feeds.map(item => {
-            return <NewsItem 
-                key={item._id} 
-                id={item._id} 
-                createDate={item.createDate} 
-                creator={item.creator} 
-                title={item.title} 
+            return <NewsItem
+                key={item._id}
+                id={item._id}
+                createDate={item.createDate}
+                creator={item.creator}
+                title={item.title}
                 content={item.content}
                 actionDelete={this.handleDelete}
                 editable={(item.creator._id === this.state.user_id) ? 'editable' : ''}
