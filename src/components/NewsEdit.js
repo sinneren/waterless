@@ -28,7 +28,7 @@ export default class NewsEdit extends Component {
                             errors.content = 'Обязательное поле';
                         }
                     }}
-                    onSubmit={(values, { setSubmitting }) => {
+                    onSubmit={(values, { setSubmitting, setErrors }) => {
                         this.props.saveAction(values, () => {
                             setSubmitting(false);
                         });
@@ -48,20 +48,25 @@ export default class NewsEdit extends Component {
                             <input 
                                 type="text" 
                                 name="title" 
+                                className="input"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.title} 
                             />
-                            {errors.title && touched.title && errors.title}
+                            {errors.title}
+                            <p>&nbsp;</p>
                             <textarea 
                                 name="content"
+                                className="textarea"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.content}
                             />
-                            {errors.content && touched.content && errors.content}
-                            <button type="submit" disabled={isSubmitting}>Сохранить</button>
-                            <button disabled={isSubmitting} onClick={this.handleCancel}>Отмена</button>
+                            {errors.content}
+                            <div className="buttons">
+                                <button type="submit" className="btn btn-success" disabled={isSubmitting}>Сохранить</button>
+                                <button disabled={isSubmitting} className="btn btn-secondary" onClick={this.handleCancel}>Отмена</button>
+                            </div>
                         </form>
                     )
                 }

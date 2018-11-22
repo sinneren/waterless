@@ -1,27 +1,47 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import jwt from 'jsonwebtoken';
 import * as newsActions from '../../actions/news';
-import NewsDetail from '../../components/NewsDetail';
 import history from "../../history";
+import NewsItem from '../../components/NewsItem';
 
 class NewsDetailContainer extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleDelete = this.handleDelete.bind(this);
+
+        this.state = {
+            user_id: null,
+        }
+    }
+    handleDelete = (id) => {
+        this.props.actions.deleteNewsById(id, this.props.state.auth.token);
+    }
     renderNewsDetail = (feed) => {
         if (feed) {
-            return <NewsDetail
+            return <NewsItem
+                id={feed._id}
+                createDate={feed.createDate}
+                creator={feed.creator}
                 title={feed.title}
-                creator={feed.creator.displayName}
-                date={feed.createDate}
                 content={feed.content}
+                actionDelete={this.handleDelete}
+                editable={(feed.creator._id === this.state.user_id) ? 'editable' : ''}
+                detail
             />
         }
     }
     componentDidMount() {
         this.props.actions.getNewsByID(this.props.match.params.newsId);
     }
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (this.props.state.news.status === 404) {
             history.push('/404');
+        }
+        if (prevState.user_id === null && this.props.state.auth.token !== null) {
+            this.setState({ user_id: jwt.decode(this.props.state.auth.token).id })
         }
     }
     render() {

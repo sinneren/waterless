@@ -1,19 +1,30 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const Header = props => {
-    const headerStyle = {
+const headerStyles = {
+    headerStyle: {
         width: '100%',
         flexShrink: '0',
         backgroundColor: '#24292e',
         color: 'hsla(0, 0 %, 100 %, .75)',
         paddingBottom: '12px',
         paddingTop: '12px',
-    }
-    const navStyle = {
+    },
+    navStyle: {
         justifyContent: 'space-between',
         alignItems: 'middle'
+    },
+    navTitle: {
+        color: '#FFF',
+        marginRight: '10px'
+    },
+    navLink: {
+        fontSize: '14px',
+        color: 'cadetblue'
     }
+
+}
+const Header = props => {
     const signIn = (event) => {
         event.preventDefault();
 
@@ -49,13 +60,13 @@ const Header = props => {
         }
     }
     return (
-        <header style={headerStyle}>
-            <div className="container" style={navStyle}>
-                <Link to="/" className="nav-link">Главная</Link>
+        <header style={headerStyles.headerStyle}>
+            <div className="container" style={headerStyles.navStyle}>
+                <Link to="/" style={headerStyles.navLink}>Главная</Link>
                 <div>
-                    {(!props.username) && <Link to="/login" className="nav-link" onClick={signIn}>Войти</Link>}
-                    {(!!props.username) && <span>{props.username}</span>}
-                    {(!!props.username) && <Link to="/logout" className="nav-link" onClick={signOut}>Выйти</Link>}
+                    {(!props.username) && <Link to="/login"  style={headerStyles.navLink} onClick={signIn}>Войти</Link>}
+                    {(!!props.username) && <span style={headerStyles.navTitle}>{props.username}</span>}
+                    {(!!props.username) && <Link to="/logout"  style={headerStyles.navLink} onClick={signOut}>Выйти</Link>}
                 </div>
             </div>
         </header>

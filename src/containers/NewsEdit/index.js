@@ -23,9 +23,9 @@ class NewsEditContainer extends Component {
     componentDidMount() {
         if (this.props.state.auth.token) {
             this.props.actions.getNewsByID(this.props.match.params.newsId);
-        } else {
-            history.push('/');
-        }
+       } else {
+           history.push('/');
+       }
     }
     componentDidUpdate(prevProps) {
         if (prevProps.state.news.edited !== this.props.state.news.edited) {
