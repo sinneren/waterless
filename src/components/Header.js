@@ -2,6 +2,18 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 const Header = props => {
+    const headerStyle = {
+        width: '100%',
+        flexShrink: '0',
+        backgroundColor: '#24292e',
+        color: 'hsla(0, 0 %, 100 %, .75)',
+        paddingBottom: '12px',
+        paddingTop: '12px',
+    }
+    const navStyle = {
+        justifyContent: 'space-between',
+        alignItems: 'middle'
+    }
     const signIn = (event) => {
         event.preventDefault();
 
@@ -37,11 +49,15 @@ const Header = props => {
         }
     }
     return (
-        <header>
-            <Link to="/">Главная</Link>
-            {(!props.username) && <Link to="/login" onClick={signIn}>Войти</Link>}
-            {(!!props.username) && <span>{props.username}</span>}
-            {(!!props.username) && <Link to="/logout" onClick={signOut}>Выйти</Link>}
+        <header style={headerStyle}>
+            <div className="container" style={navStyle}>
+                <Link to="/" className="nav-link">Главная</Link>
+                <div>
+                    {(!props.username) && <Link to="/login" className="nav-link" onClick={signIn}>Войти</Link>}
+                    {(!!props.username) && <span>{props.username}</span>}
+                    {(!!props.username) && <Link to="/logout" className="nav-link" onClick={signOut}>Выйти</Link>}
+                </div>
+            </div>
         </header>
     )
 }

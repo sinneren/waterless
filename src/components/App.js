@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import Footer from './Footer';
 import HeaderContainer from '../containers/Header';
 
+const mainStyle= {
+    padding: '10px 0',
+    flexGrow: '1',
+    flexShrink: '0',
+}
+const mainContainerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    minHeight: '100%',
+}
 export default class App extends Component {
     componentDidMount() {
         const _onInit = () => {
@@ -24,7 +35,11 @@ export default class App extends Component {
         return (
             <>
                 <HeaderContainer />
-                <main>{this.props.children}</main>
+                <main style={mainStyle}>
+                    <div className="container" style={mainContainerStyle}>
+                        {this.props.children}
+                    </div>
+                </main>
                 <Footer />
             </>
         );
