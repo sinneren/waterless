@@ -94,6 +94,7 @@ export function deleteNewsById(id, token) {
                             type: NEWS_DELETE_SUCCESS,
                             payload: {
                                 request: false,
+                                id: response.data._id,
                             }
                         });
                     }

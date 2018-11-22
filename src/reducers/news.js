@@ -15,6 +15,8 @@ const news = (state = initialState, action) => {
             return {
                 ...state,
                 request: action.payload.request,
+                feed_item: null,
+                status: 200,
                 error_message: '',
             }
         case NEWS_LOAD_FAIL:
@@ -29,6 +31,7 @@ const news = (state = initialState, action) => {
                 ...state,
                 status: 200,
                 request: action.payload.request,
+                feed_item: null,
                 feed_list: action.payload.response_data.feeds,
                 error_message: '',
             }
@@ -46,6 +49,7 @@ const news = (state = initialState, action) => {
                 ...state,
                 status: 204,
                 request: action.payload.request,
+                feed_list: state.feed_list.filter(item => item._id !== action.payload.id),
                 error_message: '',
             }
         case NEWS_EDIT_SUCCESS:

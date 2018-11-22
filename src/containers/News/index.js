@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import jwt  from 'jsonwebtoken';
 import * as newsActions from '../../actions/news';
 import NewsItem from '../../components/NewsItem';
-import history from "../../history";
 
 class News extends Component {
     constructor(props) {
@@ -14,12 +13,15 @@ class News extends Component {
 
         this.state = {
             user_id: null,
+            feed: []
         }
     }
 
     handleDelete = (id) => {
         this.props.actions.deleteNewsById(id, this.props.state.auth.token);
-        history.push('/')
+        this.props.state.news.feed_list = this.props.state.news.feed_list.filter((item) => {
+            return item._id !== id;
+        });
     }
     componentDidMount () {
         this.props.actions.getNews();
@@ -28,11 +30,12 @@ class News extends Component {
         if (prevState.user_id === null && this.props.state.auth.token !== null) {
             this.setState({user_id: jwt.decode(this.props.state.auth.token).id})
         }
+        
     }
     render() {
         return (
             <>
-                {this.props.state.news.feed_list.map(item => 
+                {this.props.state.news.feed_list.map(item =>
                     <NewsItem
                         key={item._id}
                         id={item._id}
