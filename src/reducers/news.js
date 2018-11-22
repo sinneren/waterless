@@ -27,6 +27,7 @@ const news = (state = initialState, action) => {
         case NEWS_GET:
             return {
                 ...state,
+                status: 200,
                 request: action.payload.request,
                 feed_list: action.payload.response_data.feeds,
                 error_message: '',
@@ -43,6 +44,7 @@ const news = (state = initialState, action) => {
         case NEWS_DELETE_SUCCESS:
             return {
                 ...state,
+                status: 204,
                 request: action.payload.request,
                 error_message: '',
             }

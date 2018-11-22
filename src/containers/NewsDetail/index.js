@@ -40,6 +40,9 @@ class NewsDetailContainer extends Component {
         if (this.props.state.news.status === 404) {
             history.push('/404');
         }
+        if (this.props.state.news.status === 204) {
+            history.push('/');
+        }
         if (prevState.user_id === null && this.props.state.auth.token !== null) {
             this.setState({ user_id: jwt.decode(this.props.state.auth.token).id })
         }
