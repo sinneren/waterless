@@ -6,6 +6,7 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_SIGNOUT = 'AUTH_SIGNOUT';
 
+
 export function startingAuthWithGA () {
     return dispatch => {
         dispatch({
@@ -63,5 +64,50 @@ export function errorAuthGA(message) {
                 error_message: message,
             }
         });
+    }
+}
+export function signUp(data, token) {
+    return dispatch => {
+        dispatch({
+            type: AUTH_REQUEST,
+            payload: {
+                request: true,
+            }
+        });
+        axios({
+            method: 'post',
+            url: 'http://localhost:5000/api/v1/users',
+            data: {
+                "username": data.username,
+                "password": data.password,
+                "g-recaptcha-response": data.recaptcha
+            },
+            // headers: {
+            //     'content-type': 'application/json',
+            //     'accept': 'application/json',
+            //     "Cache-Control": "no-cache",
+            //     'x-access-token': token,
+            // },
+        })
+            .then(function (response) {
+                dispatch({
+                    type: AUTH_SUCCESS,
+                    payload: {
+                        request: false,
+                        username: data.username,
+                        token: response.data.token,
+                    }
+                });
+                history.push('/');
+            })
+            .catch(function (error) {
+                dispatch({
+                    type: AUTH_FAIL,
+                    payload: {
+                        request: false,
+                        error_message: error,
+                    }
+                });
+            });
     }
 }

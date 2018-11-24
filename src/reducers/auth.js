@@ -1,5 +1,5 @@
 
-import { AUTH_FAIL, AUTH_REQUEST, AUTH_SUCCESS, AUTH_SIGNOUT} from '../actions/auth';
+import { AUTH_FAIL, AUTH_REQUEST, AUTH_SUCCESS, AUTH_SIGNOUT } from '../actions/auth';
 
 const initialState = {
     request: false,

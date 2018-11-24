@@ -8,6 +8,7 @@ import Err404 from './Err404';
 import News from '../containers/News';
 import NewsEditContainer from '../containers/NewsEdit';
 import NewsDetailContainer from '../containers/NewsDetail';
+import SignUpContainer from '../containers/SignUp';
 import history  from '../history';
 
 const Root = ({ store }) => (
@@ -19,6 +20,7 @@ const Root = ({ store }) => (
                     <Route exact path="/news" component={News} />
                     <Route exact path="/news/:newsId" component={NewsDetailContainer} />
                     <Route exact path="/news/:newsId/edit" component={NewsEditContainer} />
+                    <Route exact path="/signup" component={SignUpContainer} />
                     <Route component={Err404} />
                 </Switch>
             </App>
