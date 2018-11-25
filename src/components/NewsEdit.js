@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Formik } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import history from "../history";
 
 export default class NewsEdit extends Component {
@@ -20,13 +20,15 @@ export default class NewsEdit extends Component {
                         content: this.props.details.content,
                     }}
                     validate={values => {
-                        let errors= {};
-                        if (!values.title) {
-                            errors.title = 'Обязательное поле';
+                        let errors = {};
+                        if (!values.title && values.title.length < 1) {
+                            errors.title = 'Обязательное поле и должно быть более 1 символов';
                         }
-                        if (!values.content) {
-                            errors.content = 'Обязательное поле';
+                        if (!values.content && values.content.length < 1) {
+                            errors.content = 'Обязательное поле и должно быть более 1 символов';
                         }
+                       
+                        return errors;
                     }}
                     onSubmit={(values, { setSubmitting, setErrors }) => {
                         this.props.saveAction(values, () => {
@@ -39,35 +41,32 @@ export default class NewsEdit extends Component {
                         values,
                         errors,
                         touched,
-                        handleChange,
-                        handleBlur,
                         handleSubmit,
                         isSubmitting,
                     }) => (
-                        <form onSubmit={handleSubmit}>
-                            <input 
-                                type="text" 
-                                name="title" 
+                        <Form onSubmit={handleSubmit}>
+                            <label>Заголовок</label>
+                            <Field
+                                type="text"
+                                name="title"
                                 className="input"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
                                 value={values.title} 
                             />
-                            {errors.title}
+                            <ErrorMessage name="title" />
                             <p>&nbsp;</p>
-                            <textarea 
+                            <label>Пароль</label>
+                            <Field
+                                type="textarea"
                                 name="content"
                                 className="textarea"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
                                 value={values.content}
                             />
-                            {errors.content}
+                            <ErrorMessage name="content" />
                             <div className="buttons">
                                 <button type="submit" className="btn btn-success" disabled={isSubmitting}>Сохранить</button>
                                 <button disabled={isSubmitting} className="btn btn-secondary" onClick={this.handleCancel}>Отмена</button>
                             </div>
-                        </form>
+                        </Form>
                     )
                 }
                 </Formik>

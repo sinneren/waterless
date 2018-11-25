@@ -82,12 +82,6 @@ export function signUp(data, token) {
                 "password": data.password,
                 "g-recaptcha-response": data.recaptcha
             },
-            // headers: {
-            //     'content-type': 'application/json',
-            //     'accept': 'application/json',
-            //     "Cache-Control": "no-cache",
-            //     'x-access-token': token,
-            // },
         })
             .then(function (response) {
                 dispatch({

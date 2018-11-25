@@ -21,7 +21,9 @@ class SignUpContainer extends Component {
         });
     }
     componentDidUpdate() {
-       // this.state.afterSaving();
+        if (this.state.afterSaving) {
+            this.state.afterSaving();
+        }
     }
     render() {
         return (<SignUp saveAction={this.handleSave} />)

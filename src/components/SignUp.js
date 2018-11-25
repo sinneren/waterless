@@ -13,10 +13,10 @@ const SignUp = props => {
                 }}
                 validate={values => {
                     let errors = {};
-                    if (!values.username && values.username.length > 2) {
+                    if (!values.username && values.username.length < 2) {
                         errors.username = 'Обязательное поле и должно быть более 2 символов';
                     }
-                    if (!values.password && values.password.length > 5) {
+                    if (!values.password && values.password.length < 5) {
                         errors.password = 'Обязательное поле и должно быть более 6 символов';
                     }
                     if (!values.recaptcha) {
