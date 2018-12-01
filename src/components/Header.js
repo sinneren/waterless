@@ -64,9 +64,21 @@ const Header = props => {
             <div className="container" style={headerStyles.navStyle}>
                 <Link to="/" style={headerStyles.navLink}>Главная</Link>
                 <div>
-                    {(!props.username) && <Link to="/login"  style={headerStyles.navLink} onClick={signIn}>Войти</Link>}
-                    {(!!props.username) && <span style={headerStyles.navTitle}>{props.username}</span>}
-                    {(!!props.username) && <Link to="/logout"  style={headerStyles.navLink} onClick={signOut}>Выйти</Link>}
+                    {(!props.username) && 
+                        <>
+                            <Link to="/" style={headerStyles.navLink} onClick={signIn}>Войти через GA</Link>
+                            <span>&nbsp;|&nbsp;</span>
+                            <Link to="/login" style={headerStyles.navLink}>Войти</Link>
+                            <span>&nbsp;|&nbsp;</span>
+                            <Link to="/signup" style={headerStyles.navLink}>Регистрация</Link>
+                        </>
+                    }
+                    {(!!props.username) && 
+                        <>
+                            <span style={headerStyles.navTitle}>{props.username}</span>
+                            <Link to="/logout"  style={headerStyles.navLink} onClick={signOut}>Выйти</Link>
+                        </>
+                    }
                 </div>
             </div>
         </header>

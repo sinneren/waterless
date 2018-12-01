@@ -5,7 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 const SignUp = props => {
     return (
         <>
-            <h1>Регистрация</h1>
+            <h1>Вход</h1>
             <Formik
                 initialValues={{
                     username: '',
@@ -63,7 +63,7 @@ const SignUp = props => {
                                 />
                                 <ErrorMessage name="recaptcha" />
                                 <div className="buttons">
-                                    <button type="submit" className="btn btn-success" disabled={isSubmitting}>Зарегистрироваться</button>
+                                    <button type="submit" className="btn btn-success" disabled={isSubmitting}>Войти</button>
                                 </div>
                             </Form>
                         )

@@ -1,5 +1,5 @@
 
-import { AUTH_FAIL, AUTH_REQUEST, AUTH_SUCCESS, AUTH_SIGNOUT } from '../actions/auth';
+import { AUTH_FAIL, AUTH_REQUEST, AUTH_SUCCESS, AUTH_SIGNOUT, REG_SUCCESS } from '../actions/auth';
 
 const initialState = {
     request: false,
@@ -35,6 +35,13 @@ const auth = (state = initialState, action) => {
                 ...state,
                 username: null,
                 token: null,
+                request: action.payload.request,
+                error_message: '',
+            }
+        case REG_SUCCESS:
+            return {
+                ...state,
+                token: action.payload.token,
                 request: action.payload.request,
                 error_message: '',
             }

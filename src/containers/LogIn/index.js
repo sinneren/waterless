@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActions from '../../actions/auth';
-import SignUp from '../../components/SignUp';
+import LogIn from '../../components/LogIn';
 
-class SignUpContainer extends Component {
+class LogInContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -14,7 +14,7 @@ class SignUpContainer extends Component {
         }
     }
     handleSave = (data, cb) => {
-        this.props.actions.signUp(data);
+        this.props.actions.logIn(data);
         this.setState({
             afterSaving: cb,
         });
@@ -25,7 +25,7 @@ class SignUpContainer extends Component {
         }
     }
     render() {
-        return (<SignUp saveAction={this.handleSave} />)
+        return (<LogIn saveAction={this.handleSave} />)
     }
 }
 function mapStateToProps(state) {
@@ -38,4 +38,4 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(authActions, dispatch)
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LogInContainer)

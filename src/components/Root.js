@@ -9,6 +9,7 @@ import News from '../containers/News';
 import NewsEditContainer from '../containers/NewsEdit';
 import NewsDetailContainer from '../containers/NewsDetail';
 import SignUpContainer from '../containers/SignUp';
+import LogInContainer from '../containers/LogIn';
 import history  from '../history';
 
 const Root = ({ store }) => (
@@ -21,6 +22,7 @@ const Root = ({ store }) => (
                     <Route exact path="/news/:newsId" component={NewsDetailContainer} />
                     <Route exact path="/news/:newsId/edit" component={NewsEditContainer} />
                     <Route exact path="/signup" component={SignUpContainer} />
+                    <Route exact path="/login" component={LogInContainer} />
                     <Route component={Err404} />
                 </Switch>
             </App>
